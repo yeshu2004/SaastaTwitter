@@ -32,7 +32,7 @@ app.post("/register",async (req,res)=>{
                 email,
                 password: hash,
             });
-            let token = jwt.sign({email: email,userid: createdUser._id},"shhhh")
+            let token = jwt.sign({email: email,userid: createdUser._id}, `process`)
             res.cookie("token",token)
             res.redirect("/login")
         })
@@ -57,7 +57,7 @@ app.post("/login",async (req,res)=>{
 
     bcrypt.compare(password, user.password , function(err,result){
         if(result) {
-            let token = jwt.sign({email: email,userid: user._id},"shhhh")
+            let token = jwt.sign({email: email,userid: user._id},`keyy`)
             res.cookie("token",token)
             res.redirect("/profile")
         }
@@ -119,7 +119,7 @@ function isLoggedIn(req, res, next) {
 
     if (!token) return res.status(401).send("You must be logged in");
 
-    const data = jwt.verify(token, "shhhh");
+    const data = jwt.verify(token, `keyy`);
     req.user = data;
     next();
 }
