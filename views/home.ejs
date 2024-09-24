@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="bg-zinc-900 text-white min-h-screen w-full p-7">
+        <a href="/logout" class="text-zinc-400 underline">Logout</a>
+        <div class="text-3xl mt-5 mb-10">Welcome back <span class="text-blue-500 capitalize"><%= user.name %>!</span></div>
+        <div class="text-zinc-600 mb-5">What’s happening</div>
+        <div>
+            <div class="flex flex-wrap gap-4">
+                <% for (let j = 0; j < alluser.length; j++) { %>
+                    <% alluser[j].post.forEach(function(postId) { %>
+                        <div class="bg-zinc-800 min-h-[25vh] w-[25vw] px-4 py-3 rounded-md mb-2 relative border-[1px] border-zinc-700">
+                            <h1 class="mb-1 text-blue-500">@<%= alluser[j].userName %></h1>
+                            <p><%= postId.content %></p>
+                            <div class="absolute bottom-5 flex items-center gap-3 text-sm">
+                                <div class=""><%=postId.likes.length %> likes</div>
+                                <a href="like/<%= postId._id %>" class="text-pink-500"><%= postId.likes.indexOf(user._id) ? "Like" : "Unlike" %></a>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
